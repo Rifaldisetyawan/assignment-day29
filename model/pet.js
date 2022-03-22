@@ -26,6 +26,8 @@ class Pet {
         const allData = JSON.parse(fs.readFileSync('pet.json'))
         return allData.find(val => val.id == id )
     }
+
+    
 }
 
 module.exports = Pet

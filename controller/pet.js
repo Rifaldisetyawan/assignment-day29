@@ -7,18 +7,27 @@ class controllerPets {
 
     static createPets(req, res) {
         const data = req.body
-        if (!data.id) {
-            res.status(400).json({ message: 'Id is required!'})
-        }
-
         const existingId = Pet.findById(data.id)
-        if (existingId) {
+        if (data.id==null) {
+            res.status(400).json({ message: 'Id is required!'})
+        }else if (existingId) {
             res.status(400).json({ message: 'Id is already exist!'})
+        
+        }else{
+            Pet.create(data)
         }
-
-        Pet.create(data)
         res.status(201).json(data)
     }
+
+    // static updatePets(req,res){
+    //     const data = req.body
+    //     if (!data.id) {
+    //         res.status(400).json({ message: 'Id is not found!'})
+    //     }
+
+    //     Pet.update(data)
+    // res.status(201).json(data)
+    // }
 
     // static login(req, res) {
     //     const dataUser = req.body

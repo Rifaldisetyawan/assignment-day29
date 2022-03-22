@@ -39,6 +39,8 @@ router.put('/:id', (req, res) => {
             data[i] = req.body
             fs.writeFileSync('pet.json', JSON.stringify(data, null, 2))
             break;
+        }else{
+            res.status(400).json({ message: 'Id not found!'})
         }
     }
     res.status(201).json(req.body)
