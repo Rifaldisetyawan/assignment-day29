@@ -11,17 +11,17 @@ class controllerUsers {
     }
 
     static createUsers(req, res) {
-        const id = req.body.id;
-        const username = req.body.username;
-        const firstName = req.body.firstName;
-        const lastName = req.body.lastName;
-        const email = req.body.email;
-        const password= req.body.password;
-        const phone = req.body.phone;
-        const userStatus = req.body.userStatus;
+        let values=[req.body.id,
+            req.body.username,
+            req.body.firstName,
+            req.body.lastName,
+            req.body.email,
+            req.body.password,
+            req.body.phone,
+            req.body.userStatus];
         
 
-        db.query(User.createUsers(),[id,username,firstName,lastName,email,password,phone,userStatus],(err)=>{
+        db.query(User.createUsers(),[values],(err)=>{
             if(err){
                 res.status(400).json(err)
                 return
@@ -30,24 +30,30 @@ class controllerUsers {
                 res.status(201)
                 res.send(data)
         })
+        
     }
 
     static updateUsers(req,res){
-        // const id = req.params.id
-        // const username = req.body.username;
-        // const firstName = req.body.firstName;
-        // const lastName = req.body.lastName;
-        // const email = req.body.email;
-        // const password= req.body.password;
-        // const phone = req.body.phone;
-        // const userStatus = req.body.userStatus;
-        // db.query(User.updateUsers, [username,firstName,lastName,email,password,phone,userStatus,id], function (err) {
-        //     if(err){res.status(400).json(err)
-        //         return
-        //     }
-        //         res.status(201)
-        //         res.send(req.body)
-        // });
+        const id = req.params.id;
+        const username = req.body.username;
+        const firstName = req.body.firstName;
+        const lastName = req.body.lastName;
+        const email = req.body.email;
+        const password= req.body.password;
+        const phone = req.body.phone;
+        const userStatus = req.body.userStatus;
+        
+        db.query(User.updateUsers(), [username,firstName,lastName,email,password,phone,userStatus,id], function (err) {
+            if(err){res.status(400).json(err)
+                return
+            }
+            if(req.body.id!=id){
+                res.send("error")
+                return
+            }
+            res.status(201)
+            res.send(req.body)
+        });
     }
 
     static deleteUsers(req,res){

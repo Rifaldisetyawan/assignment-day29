@@ -7,16 +7,16 @@ class User {
     }
 
     static createUsers() {
-        let sql = `INSERT INTO user (id,username,firstName,lastName,email,password,phone,userStatus) VALUES(?,?,?,?,?,?,?,?)`;
+        let sql = `INSERT INTO user (id,username,firstName,lastName,email,password,phone,userStatus) VALUES (?)`;
         return sql;
         
     }
 
-    // static updateUsers(){
-    //     let updateQuery = `UPDATE user SET username = ?,firstName = ?,lastName = ?,email = ?,password = ?,phone = ?,userStatus = ? WHERE id = ?`;
-    //     return sql;
+    static updateUsers(){
+        let updateQuery = `UPDATE user SET username = ?,firstName = ?,lastName = ?,email = ?,password = ?,phone = ?,userStatus = ? WHERE id = ?`;
+        return updateQuery;
 
-    // }
+    }
 
     static deleteUsers(){
     let deleteQuery = `DELETE FROM user WHERE id =?`;
